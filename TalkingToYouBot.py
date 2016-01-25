@@ -1,11 +1,18 @@
 from telegram import Updater
 import json
+import os
 
 
 def getToken():
-    with open("token.json") as f:
-        token = json.load(f)
-    return token
+    token = []
+    if not os.path.exists(file_path):
+        token.append(input('Insert Token here: '))
+        with open('token.json', 'w') as f:
+            json.dump(token, f)
+    else:
+        with open("token.json") as f:
+            token = json.load(f)
+    return token[0]
 
 
 def main():
