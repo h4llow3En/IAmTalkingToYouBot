@@ -1,6 +1,8 @@
 from telegram import Updater
 import json
 import os
+import manyNames
+import reprimandUser
 
 
 def getToken():
@@ -19,7 +21,22 @@ def echo(bot, update):
     '''
     Simple function that echos every received message back to the user.
     '''
-    bot.sendMessage(chat_id=update.message.chat_id, text=update.message.text)
+    if update.message.text is not None and update.message.text != '':
+        print('Message received: "{msg}" from {usr}'.format(
+               msg=update.message.text,
+               usr=update.message.from_user.username))
+        usersToMention = manyNames.getMentions(update.message.text)
+        print(usersToMention)
+        if len(usersToMention) > 0:
+            for username in usersToMention:
+                print(username)
+                msg = buildmessage(username)
+                bot.sendMessage(chat_id=update.message.chat_id, text=msg)
+    '''
+    elif update.message.sticker is not None:
+        print("{}".format(update.message.sticker))
+        bot.sendSticker(chat_id=update.message.chat_id,
+                        sticker='BQADAQADLgEAArED5ATHstrectuzrwI')'''
 
 
 def main():
