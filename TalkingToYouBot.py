@@ -3,6 +3,7 @@ import json
 import os
 import manyNames
 import reprimandUser
+import time
 
 
 def getToken():
@@ -26,6 +27,7 @@ def echo(bot, update):
                msg=update.message.text,
                usr=update.message.from_user.username))
         usersToMention = manyNames.get_mentions(update.message.text)
+        time.sleep(2)
         if len(usersToMention) > 0:
             for username in usersToMention:
                 msg = reprimandUser.buildmessage(username)
