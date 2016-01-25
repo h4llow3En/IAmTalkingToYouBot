@@ -25,12 +25,11 @@ def echo(bot, update):
         print('Message received: "{msg}" from {usr}'.format(
                msg=update.message.text,
                usr=update.message.from_user.username))
-        usersToMention = manyNames.getMentions(update.message.text)
-        print(usersToMention)
+        usersToMention = manyNames.get_mentions(update.message.text)
         if len(usersToMention) > 0:
             for username in usersToMention:
                 print(username)
-                msg = buildmessage(username)
+                msg = reprimandUser.buildmessage(username)
                 bot.sendMessage(chat_id=update.message.chat_id, text=msg)
     '''
     elif update.message.sticker is not None:

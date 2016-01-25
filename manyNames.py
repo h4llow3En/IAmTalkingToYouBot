@@ -4,9 +4,8 @@ names = re.compile(r'(@\w+)')
 
 
 def get_mentions(message):
-    print(message)
-    result = names.finditer(message)
-    results = {}
+    result = [x for x in names.finditer(message)]
+    print(len(result))
     for mention in result:
-        results.apppend(mention.group(0))
+        results.append(mention.group(0))
     return results
