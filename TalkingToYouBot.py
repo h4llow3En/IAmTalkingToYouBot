@@ -28,7 +28,6 @@ def echo(bot, update):
         usersToMention = manyNames.get_mentions(update.message.text)
         if len(usersToMention) > 0:
             for username in usersToMention:
-                print(username)
                 msg = reprimandUser.buildmessage(username)
                 bot.sendMessage(chat_id=update.message.chat_id, text=msg)
     '''
