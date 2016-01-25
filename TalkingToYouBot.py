@@ -5,7 +5,7 @@ import os
 
 def getToken():
     token = []
-    if not os.path.exists(file_path):
+    if not os.path.exists('token.json'):
         token.append(input('Insert Token here: '))
         with open('token.json', 'w') as f:
             json.dump(token, f)
@@ -24,6 +24,13 @@ def echo(bot, update):
 
 def main():
     token = getToken()
+    print('''
+       .. ..
+     .'  `  `.
+   .'_.-...-._`.   Hey, I am talking to you!
+    `.       .'
+      `-...-'
+''')
     print("Starting Bot...")
 
     # Start the Bot with the token
