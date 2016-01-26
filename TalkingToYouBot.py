@@ -4,7 +4,6 @@ import os
 import manyNames
 import reprimandUser
 import time
-import logging
 
 
 def getToken():
@@ -34,6 +33,8 @@ def echo(bot, update):
                 msg = ''
                 if username in ('@{}'.format(bot.first_name), bot.name):
                     msg = reprimandUser.noBotMessage(update.message.from_user)
+                elif username == '@{}'.format(update.message.from_user.username):
+                    msg = reprimandUser.selfMention(update.message.from_user)
                 else:
                     msg = reprimandUser.buildmessage(username)
                 bot.sendMessage(chat_id=update.message.chat_id, text=msg)
@@ -45,8 +46,6 @@ def echo(bot, update):
 
 
 def main():
-    logger = logging.getLogger()
-    logger.setLevel(logging.DEBUG)
     token = getToken()
     print('''
        .. ..

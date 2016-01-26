@@ -10,9 +10,19 @@ mentionStrings = [
 ]
 
 notTalkingStrings = [
-    'Mich interessiert nicht, was du mir sagst, rede mit anderen !',
+    'Mich interessiert nicht, was du mir sagst, rede mit anderen!',
     'Kümmere dich um deinen Kram, {usr}!',
     'Hey {usr}, warum sollte ich mit mir selbst reden?!'
+]
+
+selfMentionStrings = [
+    'Sag mal {usr}, brauchst du eigentlich viel Aufmerksamkeit?',
+    '{usr}, warum musst du dich immer selbst hervorheben?',
+    'Du willst Aufmerksamkeit? Hier: {usr}',
+    'Ich muss schon sagen, {usr}, du brauchst ziemlich viel Aufmerksamkeit...',
+    'Willst du, dass auch mal jemand mit dir schreibt und du erwähnst dich \
+deshalb selbst, {usr}?',
+    '{usr}, bitte. Ich brauche dich nicht erinnern, dass du mit DIR redest...'
 ]
 
 
@@ -29,4 +39,12 @@ def noBotMessage(user):
     randstring = notTalkingStrings[
         random.randint(0, maxsize) % len(notTalkingStrings)]
     message = randstring.replace('{usr}', user.name)
+    return message
+
+
+def selfMention(user):
+    random.seed()
+    randstring = selfMentionStrings[
+        random.randint(0, maxsize) % len(selfMentionStrings)]
+    message = randstring.format(usr=user.name)
     return message
