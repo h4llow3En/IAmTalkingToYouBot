@@ -4,6 +4,7 @@ import os
 import manyNames
 import reprimandUser
 import time
+import logging
 
 
 def getToken():
@@ -24,13 +25,17 @@ def echo(bot, update):
     '''
     if update.message.text is not None and update.message.text != '':
         print('Message received: "{msg}" from {usr}'.format(
-               msg=update.message.text,
-               usr=update.message.from_user.username))
+            msg=update.message.text,
+            usr=update.message.from_user.username))
         usersToMention = manyNames.get_mentions(update.message.text)
         time.sleep(2)
         if len(usersToMention) > 0:
             for username in usersToMention:
-                msg = reprimandUser.buildmessage(username)
+                msg = ''
+                if username in ('@{}'.format(bot.first_name), bot.name):
+                    msg = reprimandUser.noBotMessage(update.message.from_user)
+                else:
+                    msg = reprimandUser.buildmessage(username)
                 bot.sendMessage(chat_id=update.message.chat_id, text=msg)
     '''
     elif update.message.sticker is not None:
@@ -40,6 +45,8 @@ def echo(bot, update):
 
 
 def main():
+    logger = logging.getLogger()
+    logger.setLevel(logging.DEBUG)
     token = getToken()
     print('''
        .. ..

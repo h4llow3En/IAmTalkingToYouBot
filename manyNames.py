@@ -1,11 +1,7 @@
 import re
 
-names = re.compile(r'(@\w+)')
+names = re.compile(r'(?:^|\s)(@\w+)')
 
 
 def get_mentions(message):
-    result = [x for x in names.finditer(message)]
-    results = set()
-    for mention in result:
-        results.add(mention.group(0))
-    return results
+    return {x.group(1) for x in names.finditer(message)}
