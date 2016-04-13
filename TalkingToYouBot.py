@@ -23,6 +23,14 @@ def echo(bot, update):
     Simple function that echos every received message back to the user.
     '''
     if update.message.text is not None and update.message.text != '':
+        if '+1' in update.message.text:
+            bot.sendMessage(chat_id=update.message.chat_id,
+                            text='{} gefällt das!'.format(
+                                update.message.from_user.username))
+        if '-1' in update.message.text:
+            bot.sendMessage(chat_id=update.message.chat_id,
+                            text='{} gefällt das nicht!'.format(
+                                update.message.from_user.username))
         print('Message received: "{msg}" from {usr}'.format(
             msg=update.message.text,
             usr=update.message.from_user.username))
