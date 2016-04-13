@@ -17,7 +17,7 @@ def check_vote(bot_stuff):
             match_up.group(1)), bot_stuff=bot_stuff)
 
 
-def create_vote_message(up=True, count=0, bot_stuff):
+def create_vote_message(bot_stuff, up=True, count=0):
     if count == 0:
         return
     else:
