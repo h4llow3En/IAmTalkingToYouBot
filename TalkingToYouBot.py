@@ -4,6 +4,7 @@ import os
 import manyNames
 import reprimandUser
 import time
+import voting
 
 
 def getToken():
@@ -23,14 +24,11 @@ def echo(bot, update):
     Simple function that echos every received message back to the user.
     '''
     if update.message.text is not None and update.message.text != '':
-        if '+1' in update.message.text:
-            bot.sendMessage(chat_id=update.message.chat_id,
-                            text='{} gefällt das!'.format(
-                                update.message.from_user.username))
-        if '-1' in update.message.text:
-            bot.sendMessage(chat_id=update.message.chat_id,
-                            text='{} gefällt das nicht!'.format(
-                                update.message.from_user.username))
+        bot_stuff = {'sendMessage': bot.sendMessage,
+                     'chat_id': update.message.chat_id,
+                     'username': update.message.from_user.username,
+                     'message': update.message.text}
+        voting.upvote(bot_stuff)
         print('Message received: "{msg}" from {usr}'.format(
             msg=update.message.text,
             usr=update.message.from_user.username))
@@ -41,7 +39,8 @@ def echo(bot, update):
                 msg = ''
                 if username in ('@{}'.format(bot.first_name), bot.name):
                     msg = reprimandUser.noBotMessage(update.message.from_user)
-                elif username == '@{}'.format(update.message.from_user.username):
+                elif username == '@{}'.format(
+                        update.message.from_user.username):
                     msg = reprimandUser.selfMention(update.message.from_user)
                 else:
                     msg = reprimandUser.buildmessage(username)
