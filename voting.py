@@ -1,7 +1,7 @@
 import re
 
-re_upvote = re.compile(r'(?:^|\s)\+(\d)+').match
-re_downvote = re.compile(r'(?:^|\s)\-(\d)+').match
+re_upvote = re.compile('(?:^|\s)\+(\d+)').match
+re_downvote = re.compile('(?:^|\s)\-(\d+)').match
 
 message = '{name} gefällt das{times}{nicht}.'
 
@@ -14,7 +14,7 @@ def check_vote(bot_stuff):
             match_up.group(1)), bot_stuff=bot_stuff)
     elif match_down is not None:
         create_vote_message(up=False, count=int(
-            match_up.group(1)), bot_stuff=bot_stuff)
+            match_down.group(1)), bot_stuff=bot_stuff)
 
 
 def create_vote_message(bot_stuff, up=True, count=0):
@@ -24,4 +24,4 @@ def create_vote_message(bot_stuff, up=True, count=0):
         bot_stuff['sendMessage'](chat_id=bot_stuff['chat_id'],
                                  text=message.format(name=bot_stuff['username'],
                                                      times='\
-' if count == 1 else '{}-fach'.format(count), nicht='' if up else ' nicht'))
+' if count == 1 else ' {}-fach'.format(count), nicht='' if up else ' nicht'))
