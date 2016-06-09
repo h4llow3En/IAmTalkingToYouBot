@@ -1,4 +1,4 @@
-from telegram import Updater
+from telegram.ext import Updater, MessageHandler, Filters
 import json
 import os
 import manyNames
@@ -68,7 +68,7 @@ def main():
     dispatcher = updater.dispatcher
 
     # Add the echo-Message Handler to the Dispatcher
-    dispatcher.addTelegramMessageHandler(echo)
+    dispatcher.add_handler(MessageHandler([Filters.text], echo)) # addTelegramMessageHandler(echo)
 
     # Make the bot listen for commands
     updater.start_polling()
