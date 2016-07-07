@@ -5,6 +5,7 @@ import manyNames
 import reprimandUser
 import time
 import voting
+import botpi
 
 
 def getToken():
@@ -28,6 +29,7 @@ def echo(bot, update):
                      'chat_id': update.message.chat_id,
                      'username': update.message.from_user.username,
                      'message': update.message.text}
+        botpi.check_pi(bot_stuff)
         voting.check_vote(bot_stuff)
         print('Message received: "{msg}" from {usr}'.format(
             msg=update.message.text,
