@@ -1,7 +1,8 @@
 import re
 
 names = re.compile(r'(?:^|\s)(@\w+)')
-droggelbecher = re.compile(r'[Dd]roggelbecher').search
+droggelbecher = re.compile(
+    r'[Dd].*r.*o.*g.*g.*e.*l.*b.*e.*c.*h.*e.*r.*').search
 
 message = 'Droggelbecher? ... Droggelbecher!\n\nhttps://youtu.be/6V3eESJ66Nk'
 
