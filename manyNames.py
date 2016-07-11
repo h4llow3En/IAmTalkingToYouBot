@@ -1,7 +1,7 @@
 import re
 
 names = re.compile(r'(?:^|\s)(@\w+)')
-droggelbecher = re.compile(r'(?:^|\s)[Dd]roggelbecher').search
+droggelbecher = re.compile(r'[Dd]roggelbecher').search
 
 message = 'Droggelbecher? ... Droggelbecher!\n\nhttps://youtu.be/6V3eESJ66Nk'
 
