@@ -29,29 +29,25 @@ def echo(bot, update):
                      'chat_id': update.message.chat_id,
                      'username': update.message.from_user.username,
                      'message': update.message.text}
-        botpi.check_pi(bot_stuff)
-        voting.check_vote(bot_stuff)
-        print('Message received: "{msg}" from {usr}'.format(
-            msg=update.message.text,
-            usr=update.message.from_user.username))
-        usersToMention = manyNames.get_mentions(update.message.text)
-        time.sleep(2)
-        if len(usersToMention) > 0:
-            for username in usersToMention:
-                msg = ''
-                if username in ('@{}'.format(bot.first_name), bot.name):
-                    msg = reprimandUser.noBotMessage(update.message.from_user)
-                elif username == '@{}'.format(
-                        update.message.from_user.username):
-                    msg = reprimandUser.selfMention(update.message.from_user)
-                else:
-                    msg = reprimandUser.buildmessage(username)
-                bot.sendMessage(chat_id=update.message.chat_id, text=msg)
-    '''
-    elif update.message.sticker is not None:
-        print("{}".format(update.message.sticker))
-        bot.sendSticker(chat_id=update.message.chat_id,
-                        sticker='BQADAQADLgEAArED5ATHstrectuzrwI')'''
+        if not manyNames.has_droggelbecher(bot_stuff):
+            botpi.check_pi(bot_stuff)
+            voting.check_vote(bot_stuff)
+            print('Message received: "{msg}" from {usr}'.format(
+                msg=update.message.text,
+                usr=update.message.from_user.username))
+            usersToMention = manyNames.get_mentions(update.message.text)
+            time.sleep(2)
+            if len(usersToMention) > 0:
+                for username in usersToMention:
+                    msg = ''
+                    if username in ('@{}'.format(bot.first_name), bot.name):
+                        msg = reprimandUser.noBotMessage(update.message.from_user)
+                    elif username == '@{}'.format(
+                            update.message.from_user.username):
+                        msg = reprimandUser.selfMention(update.message.from_user)
+                    else:
+                        msg = reprimandUser.buildmessage(username)
+                    bot.sendMessage(chat_id=update.message.chat_id, text=msg)
 
 
 def main():
