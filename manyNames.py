@@ -1,6 +1,8 @@
 import re
 
 names = re.compile(r'(?:^|\s)(@\w+)')
+mm = re.compile(r'(?:^|\s)MM(?:$|\s)').search
+herzog = re.compile(r'(?:^|\s)Alexander herzog(?:$|\s)').search
 droggelbecher = re.compile(
     r'd.*r.*o.*g.*g.*e.*l.*b.*e.*c.*h.*e.*r.*', flags=re.IGNORECASE).search
 
@@ -17,3 +19,18 @@ def has_droggelbecher(bot_stuff):
                                  text=message)
         return True
     return False
+
+
+def is_mm(bot_stuff):
+    realy = 'Och ne, wirklich? {}?'
+    has_mm = True if mm(bot_stuff['message']) is not None else False
+    has_herz = True if herzog(bot_stuff['message']) is not None False
+    if has_mm or has_herz:
+        if has_mm != has_herz:
+            bot_stuff['sendMessage'](chat_id=bot_stuff['chat_id'],
+                                     text=realy.format(
+                                     'MM' if has_mm else 'Alexander Herzog'))
+        else:
+            bot_stuff['sendMessage'](chat_id=bot_stuff['chat_id'],
+                                     text=realy.format(
+                                     'MM und Alexander Herzog'))

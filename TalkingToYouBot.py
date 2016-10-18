@@ -29,6 +29,7 @@ def echo(bot, update):
                      'chat_id': update.message.chat_id,
                      'username': update.message.from_user.username,
                      'message': update.message.text}
+        manyNames.has_mm(bot_stuff)
         if not manyNames.has_droggelbecher(bot_stuff):
             botpi.check_pi(bot_stuff)
             voting.check_vote(bot_stuff)
