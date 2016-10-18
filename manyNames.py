@@ -2,7 +2,7 @@ import re
 
 names = re.compile(r'(?:^|\s)(@\w+)')
 mm = re.compile(r'(?:^|\s)MM(?:$|\s)').search
-herzog = re.compile(r'(?:^|\s)Alexander herzog(?:$|\s)').search
+herzog = re.compile(r'(?:^|\s)Alexander Herzog(?:$|\s)').search
 droggelbecher = re.compile(
     r'd.*r.*o.*g.*g.*e.*l.*b.*e.*c.*h.*e.*r.*', flags=re.IGNORECASE).search
 
