@@ -1,6 +1,6 @@
 import re
 
-re_pi = re.compile(r'(?:^|\s)(((P|p)i)|(π)|(3(\.|,)14\d*))').search
+re_pi = re.compile(r'(?:^|\s)(((P|p)i\W)|(π)|(3(\.|,)14\d*))').search
 
 message = "@{name}, eigentlich is π ja 3.1415926535897932384626433832795028841971693\
 9937510582097494... aber rechne lieber mit 3, das ist wesentlich einfacher!"
